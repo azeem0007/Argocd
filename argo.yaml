@@ -1,24 +1,24 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: my-second-app
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://github.com/kubernetes/examples
-#     targetRevision: HEAD
-#     path: web/guestbook
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: default
-#   syncPolicy:
-#     automated:
-#       prune: true        # Automatically delete resources removed from git
-#       #selfHeal: true     # Automatically correct drift
-#     retry:
-#       limit: 5
-#       backoff:
-#         duration: 5s
-#         factor: 2
-#         maxDuration: 3m
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-second-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kubernetes/examples
+    targetRevision: HEAD
+    path: web/guestbook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: false        # Automatically delete resources removed from git
+      selfHeal: false     # Automatically correct drift
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
